@@ -1,0 +1,22 @@
+# Print hello world and the PR label, also output the os version
+# The workflow will fail if the PR label is not set
+# The workflow will run on a matrix of runs-on based on the labels on the Print
+
+on:
+  pull_request:
+    types: [labeled]
+
+# find the label matrix from: github.event.pull_request.labels.*.name
+
+jobs:
+  build:
+    strategy:     
+      matrix:
+        os: ${{ github.event.pull_request.labels.*.name }}
+    runs-on: ${{ matrix.os }}
+
+    steps:
+    - name: Hello world action
+      run: echo "Hello world! The PR label is ${{ github.event.pull_request.labels.*.name }}"
+    - name: OS version
+      run: echo "The OS version is ${{ runner.os }}"
