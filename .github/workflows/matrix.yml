@@ -21,4 +21,5 @@ jobs:
     - name: Hello world action
       run: echo "Hello world! The PR label is ${{ github.event.pull_request.labels.*.name }}"
     - name: OS version
-      run: echo "The OS version is ${{ runner.os.version }}"
+      # echo os version from linux command
+      run: lsb_release -a
